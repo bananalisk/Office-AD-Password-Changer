@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 try
 {
-    $suffixStart = "FX"
+    $suffixStart = "JustASuffix"
     $newPw = ""
 
     $policy = iex 'Get-ADDefaultDomainPasswordPolicy'
@@ -60,24 +60,30 @@ try
                 else
                 {
                     Write-Host "Sorry, the password policy requires passwords to be at least $policyMinimumPasswordLength characters."
+                    pause
                 }                
             }
             else
             {
                 Write-Host 'New Passwords did not match. Nothing was done.'
+                pause
             }
         }
         else
         {
             Write-Host 'Current Passwords did not match. Nothing was done.'
+            pause
         }
     }
     else
     {
         Write-Host "Sorry, the password policy wont allow us to change Passwords more than once every $policyMininumPasswordAge days. Nothing was done."
+        pause
     }
 }
 catch
 {
-    Write-Host 'Error detected, stopped running script.'
+    Write-Host 'Error! Stopped running script.'
+    Write-Host 'If the iteration started, take note of what your current password is before exiting!'
+    pause
 }
